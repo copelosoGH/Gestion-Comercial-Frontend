@@ -2,6 +2,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import PeopleIcon from '@mui/icons-material/People';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -9,11 +10,8 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 /**
- * Árbol del menú lateral. Esta MISMA estructura la consumen el Sidebar
- * (para dibujar el menú) y AppRoutes (para generar las <Route>).
- *
- * - Un ítem con `path` es una hoja navegable.
- * - Un ítem con `children` es un padre desplegable (Collapse).
+ * Arbol del menu lateral. Esta MISMA estructura la consumen el Sidebar
+ * (para dibujar el menu) y AppRoutes (para generar las <Route>).
  */
 export const menu = [
   { label: 'Inicio', icon: <HomeIcon />, path: '/' },
@@ -28,10 +26,19 @@ export const menu = [
   },
 
   {
+    label: 'Compras',
+    icon: <ShoppingCartIcon />,
+    children: [
+      { label: 'Nueva compra', path: '/compras/nueva' },
+      { label: 'Historial', path: '/compras' },
+    ],
+  },
+
+  {
     label: 'Productos',
     icon: <Inventory2Icon />,
     children: [
-      { label: 'Catálogo', path: '/productos' },
+      { label: 'Catalogo', path: '/productos' },
       { label: 'Importar / Exportar', path: '/productos/importar' },
     ],
   },
@@ -45,7 +52,7 @@ export const menu = [
       { label: 'Ajustes', path: '/stock/ajustes' },
       { label: 'Mermas', path: '/stock/mermas' },
       { label: 'Alertas', path: '/stock/alertas' },
-      { label: 'Reposición', path: '/stock/reposicion' },
+      { label: 'Reposicion', path: '/stock/reposicion' },
     ],
   },
 
@@ -61,7 +68,7 @@ export const menu = [
   { label: 'Clientes', icon: <PeopleIcon />, path: '/clientes' },
   { label: 'Proveedores', icon: <LocalShippingIcon />, path: '/proveedores' },
   { label: 'Reportes', icon: <AssessmentIcon />, path: '/reportes' },
-  { label: 'Configuración', icon: <SettingsIcon />, path: '/configuracion' },
+  { label: 'Configuracion', icon: <SettingsIcon />, path: '/configuracion' },
 ];
 
 export default menu;

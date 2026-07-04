@@ -7,7 +7,7 @@ import SaveIcon from '@mui/icons-material/Save';
 
 import cuentaCorrienteApi from '../../api/cuentaCorriente.js';
 import clientesApi from '../../api/clientes.js';
-import { ID_USUARIO_ACTUAL, MEDIOS_PAGO } from '../../config/app.js';
+import { getIdUsuarioActual, MEDIOS_PAGO } from '../../config/app.js';
 import { formatMoneda } from '../../utils/formato.js';
 
 // Medios validos para un cobro real (cuenta corriente NO es medio de cobro).
@@ -57,7 +57,7 @@ export default function PagoDialog({ open, onClose, onGuardado, clientePreset = 
     setGuardando(true);
     try {
       await cuentaCorrienteApi.registrarPago({
-        idUsuario: ID_USUARIO_ACTUAL,
+        idUsuario: getIdUsuarioActual(),
         idCliente: cliente.idCliente,
         monto: Number(monto),
         medioPago,

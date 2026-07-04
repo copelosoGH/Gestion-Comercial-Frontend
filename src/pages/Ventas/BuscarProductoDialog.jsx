@@ -58,6 +58,8 @@ export default function BuscarProductoDialog({ open, onClose, onAgregar }) {
       idVariante: v.idVariante,
       descripcion: v.descripcion,
       precioVenta: v.precioVenta,
+      precioCosto: v.precioCosto,
+      unidadesPorCaja: v.unidadesPorCaja,
       cantidad,
       stockTotal: v.stockTotal,
     });

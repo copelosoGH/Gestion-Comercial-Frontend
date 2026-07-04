@@ -1,31 +1,32 @@
 import { createContext, useContext, useState } from 'react';
+import authApi from '../api/auth.js';
+import { getUsuario, getToken, setSession, clearSession } from './session.js';
 
 /**
- * ANDAMIAJE DE AUTH (placeholder).
- * Por ahora NO hay login: el backend todavía no expone endpoint de autenticación
- * (las ventas usan un idUsuario fijo). Este contexto queda listo para enchufar
- * el login real cuando exista:
- *   - guardar token en el interceptor de src/api/axios.js
- *   - envolver rutas privadas con <ProtectedRoute>
- *
- * Mientras tanto exponemos un usuario "de sistema" fijo.
+ * Contexto de autenticacion real (login por usuario + contraseña, token JWT).
+ * El token y los datos del usuario viven en localStorage (ver session.js).
  */
-const USUARIO_SISTEMA = { idUsuario: 1, nombre: 'Sistema' };
-
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [usuario, setUsuario] = useState(USUARIO_SISTEMA);
+  const [usuario, setUsuario] = useState(() => getUsuario());
 
-  const login = async (/* credenciales */) => {
-    // TODO: cuando exista el endpoint -> POST /auth/login, guardar token
-    setUsuario(USUARIO_SISTEMA);
+  const login = async (usuarioLogin, password) => {
+    const data = await authApi.login(usuarioLogin, password);
+    setSession(data.token, data.usuario);
+    setUsuario(data.usuario);
+    return data.usuario;
   };
 
-  const logout = () => setUsuario(null);
+  const logout = () => {
+    clearSession();
+    setUsuario(null);
+  };
+
+  const autenticado = !!usuario && !!getToken();
 
   return (
-    <AuthContext.Provider value={{ usuario, login, logout, autenticado: !!usuario }}>
+    <AuthContext.Provider value={{ usuario, login, logout, autenticado }}>
       {children}
     </AuthContext.Provider>
   );

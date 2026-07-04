@@ -12,7 +12,7 @@ import BuscarProductoDialog from './BuscarProductoDialog.jsx';
 import ventasApi from '../../api/ventas.js';
 import clientesApi from '../../api/clientes.js';
 import { formatMoneda } from '../../utils/formato.js';
-import { ID_USUARIO_ACTUAL, MEDIOS_PAGO } from '../../config/app.js';
+import { getIdUsuarioActual, MEDIOS_PAGO } from '../../config/app.js';
 
 const centavos = (n) => Math.round(Number(n) * 100);
 
@@ -95,7 +95,7 @@ export default function NuevaVenta() {
     setGuardando(true);
     try {
       const body = {
-        idUsuario: ID_USUARIO_ACTUAL,
+        idUsuario: getIdUsuarioActual(),
         idCliente: cliente?.idCliente ?? null,
         observacion: observacion.trim() || null,
         items: lineas.map((l) => ({ idVariante: l.idVariante, cantidad: l.cantidad })),

@@ -12,7 +12,7 @@ import BuscarProductoDialog from '../Ventas/BuscarProductoDialog.jsx';
 import useUbicaciones from '../../hooks/useUbicaciones.js';
 import stockApi from '../../api/stock.js';
 import { formatNumero } from '../../utils/formato.js';
-import { ID_USUARIO_ACTUAL } from '../../config/app.js';
+import { getIdUsuarioActual } from '../../config/app.js';
 
 export default function Transferencias() {
   const { ubicaciones, loading: cargandoUbic, error: errorUbic } = useUbicaciones();
@@ -41,7 +41,7 @@ export default function Transferencias() {
     setGuardando(true);
     try {
       await stockApi.transferir({
-        idUsuario: ID_USUARIO_ACTUAL,
+        idUsuario: getIdUsuarioActual(),
         idUbicacionOrigen: Number(origen),
         idUbicacionDestino: Number(destino),
         observacion: observacion.trim() || null,

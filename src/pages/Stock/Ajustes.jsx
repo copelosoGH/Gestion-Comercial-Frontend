@@ -11,7 +11,7 @@ import FactCheckIcon from '@mui/icons-material/FactCheck';
 import BuscarProductoDialog from '../Ventas/BuscarProductoDialog.jsx';
 import useUbicaciones from '../../hooks/useUbicaciones.js';
 import stockApi from '../../api/stock.js';
-import { ID_USUARIO_ACTUAL } from '../../config/app.js';
+import { getIdUsuarioActual } from '../../config/app.js';
 
 export default function Ajustes() {
   const { ubicaciones, loading: cargandoUbic, error: errorUbic } = useUbicaciones();
@@ -38,7 +38,7 @@ export default function Ajustes() {
     setGuardando(true);
     try {
       await stockApi.ajustar({
-        idUsuario: ID_USUARIO_ACTUAL,
+        idUsuario: getIdUsuarioActual(),
         idUbicacion: Number(ubicacion),
         observacion: observacion.trim() || null,
         items: items.map((i) => ({ idVariante: i.idVariante, cantidadContada: Number(i.cantidadContada) })),

@@ -1,12 +1,12 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
 
-/**
- * ANDAMIAJE (placeholder). Envolverá las rutas privadas cuando haya login.
- * Uso futuro:  <Route element={<ProtectedRoute><Layout/></ProtectedRoute>} >
- */
+/** Envuelve las rutas privadas: si no hay sesion, manda al login. */
 export default function ProtectedRoute({ children }) {
   const { autenticado } = useAuth();
-  if (!autenticado) return <Navigate to="/login" replace />;
+  const location = useLocation();
+  if (!autenticado) {
+    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+  }
   return children;
 }

@@ -8,7 +8,7 @@ import BlockIcon from '@mui/icons-material/Block';
 
 import ventasApi from '../../api/ventas.js';
 import { formatMoneda, formatNumero, formatFechaHora } from '../../utils/formato.js';
-import { ID_USUARIO_ACTUAL, MEDIOS_PAGO } from '../../config/app.js';
+import { getIdUsuarioActual, MEDIOS_PAGO } from '../../config/app.js';
 
 const labelMedio = (v) => MEDIOS_PAGO.find((m) => m.valor === v)?.label ?? v;
 
@@ -40,7 +40,7 @@ export default function VentaDetalleDialog({ open, idVenta, onClose, onAnulada }
     setAnulando(true);
     setError(null);
     try {
-      await ventasApi.anular(idVenta, { idUsuario: ID_USUARIO_ACTUAL, motivo: motivo.trim() || null });
+      await ventasApi.anular(idVenta, { idUsuario: getIdUsuarioActual(), motivo: motivo.trim() || null });
       onAnulada?.();
     } catch (err) {
       setError(err.mensaje ?? 'No se pudo anular la venta');

@@ -11,7 +11,7 @@ import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import BuscarProductoDialog from '../Ventas/BuscarProductoDialog.jsx';
 import useUbicaciones from '../../hooks/useUbicaciones.js';
 import stockApi from '../../api/stock.js';
-import { ID_USUARIO_ACTUAL } from '../../config/app.js';
+import { getIdUsuarioActual } from '../../config/app.js';
 
 const TIPOS = [
   { valor: 'ROTURA', label: 'Rotura' },
@@ -46,7 +46,7 @@ export default function Mermas() {
     setGuardando(true);
     try {
       await stockApi.registrarMerma({
-        idUsuario: ID_USUARIO_ACTUAL,
+        idUsuario: getIdUsuarioActual(),
         idUbicacion: Number(ubicacion),
         tipo,
         observacion: observacion.trim() || null,

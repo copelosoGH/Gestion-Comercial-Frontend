@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import Inicio from '../pages/Inicio/Inicio.jsx';
 import NuevaVenta from '../pages/Ventas/NuevaVenta.jsx';
 import HistorialVentas from '../pages/Ventas/HistorialVentas.jsx';
+import NuevaCompra from '../pages/Compras/NuevaCompra.jsx';
+import HistorialCompras from '../pages/Compras/HistorialCompras.jsx';
 import Catalogo from '../pages/Productos/Catalogo.jsx';
 import ImportarExportar from '../pages/Productos/ImportarExportar.jsx';
 import Existencias from '../pages/Stock/Existencias.jsx';
@@ -19,10 +21,7 @@ import Reportes from '../pages/Reportes/Reportes.jsx';
 import Configuracion from '../pages/Configuracion/Configuracion.jsx';
 import NotFound from '../pages/NotFound.jsx';
 
-/**
- * Definición central de rutas. Los paths coinciden con los del menú
- * (src/routes/menuConfig.jsx).
- */
+/** Definicion central de rutas (coinciden con menuConfig.jsx). */
 export default function AppRoutes() {
   return (
     <Routes>
@@ -30,6 +29,9 @@ export default function AppRoutes() {
 
       <Route path="/ventas" element={<HistorialVentas />} />
       <Route path="/ventas/nueva" element={<NuevaVenta />} />
+
+      <Route path="/compras" element={<HistorialCompras />} />
+      <Route path="/compras/nueva" element={<NuevaCompra />} />
 
       <Route path="/productos" element={<Catalogo />} />
       <Route path="/productos/importar" element={<ImportarExportar />} />

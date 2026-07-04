@@ -10,13 +10,16 @@ import '@fontsource/roboto/700.css';
 
 import App from './App.jsx';
 import theme from './theme/theme.js';
+import { AuthProvider } from './auth/AuthContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
